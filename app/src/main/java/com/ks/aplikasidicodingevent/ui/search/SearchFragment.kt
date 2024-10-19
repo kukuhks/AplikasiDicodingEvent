@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ks.aplikasidicodingevent.data.response.ListEventsItem
+import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.databinding.FragmentSearchBinding
 import com.ks.aplikasidicodingevent.ui.EventAdapter
 

@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ks.aplikasidicodingevent.data.response.ListEventsItem
+import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.databinding.FragmentHomeBinding
 import com.ks.aplikasidicodingevent.ui.HorizontalAdapter
 import com.ks.aplikasidicodingevent.ui.VerticalAdapter
-import com.ks.aplikasidicodingevent.ui.search.SearchViewModel
 
 class HomeFragment : Fragment() {
 

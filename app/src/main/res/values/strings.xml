@@ -12,6 +12,7 @@
     <string name="detail_event">Detail Event</string>
     <string name="search">Search</string>
     <string name="searchbar_hint">Masukkan kata</string>
+    <string name="favorite">Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

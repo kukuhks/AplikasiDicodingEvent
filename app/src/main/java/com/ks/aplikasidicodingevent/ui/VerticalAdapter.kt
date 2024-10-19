@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.ks.aplikasidicodingevent.data.response.ListEventsItem
+import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.databinding.ItemEventHomeVerticalBinding
 
 class VerticalAdapter(private val listener: OnItemClickListener) : ListAdapter<ListEventsItem, VerticalAdapter.EventVerticalViewHolder>(DIFF_CALLBACK) {

@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ks.aplikasidicodingevent.data.response.ListEventsItem
+import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.databinding.FragmentUpcomingBinding
 import com.ks.aplikasidicodingevent.ui.EventAdapter
-import com.ks.aplikasidicodingevent.ui.search.SearchViewModel
 
 class UpcomingFragment : Fragment(), EventAdapter.OnItemClickListener {
     private var _binding: FragmentUpcomingBinding? = null
