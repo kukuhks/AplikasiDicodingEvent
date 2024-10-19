@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AplikasiDicodingEvent</string>
+    <string name="title">Judul</string>
+    <string name="title_home">Home</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_finish">Finished</string>
+    <string name="owner_name">Penyelenggara: </string>
+    <string name="quota_left">Sisa Kuota: </string>
+    <string name="informasi">Informasi: </string>
+    <string name="date">Tanggal:</string>
+    <string name="register">Daftar</string>
+    <string name="detail_event">Detail Event</string>
+    <string name="search">Search</string>
+    <string name="searchbar_hint">Masukkan kata</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>
