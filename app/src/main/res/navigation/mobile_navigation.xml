@@ -56,4 +56,10 @@
             android:id="@+id/action_navigation_search_to_navigation_detail"
             app:destination="@id/navigation_detail" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:label="@string/setting"
+        android:name="com.ks.aplikasidicodingevent.ui.setting.SettingFragment"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

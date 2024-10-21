@@ -20,7 +20,6 @@ class UpcomingViewModel : ViewModel() {
 
     companion object {
         private const val TAG = "UpcomingViewModel"
-//        private const val ACTIVE = 1
     }
 
     init {

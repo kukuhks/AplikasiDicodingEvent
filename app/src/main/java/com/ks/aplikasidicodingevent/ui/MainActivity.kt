@@ -4,14 +4,27 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.CompoundButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.ks.aplikasidicodingevent.R
 import com.ks.aplikasidicodingevent.databinding.ActivityHomeBinding
+import com.ks.aplikasidicodingevent.ui.setting.SettingPreference
+import com.ks.aplikasidicodingevent.ui.setting.SettingViewModel
+import com.ks.aplikasidicodingevent.ui.setting.SettingViewModelFactory
+import com.ks.aplikasidicodingevent.ui.setting.dataStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,18 +39,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
 
-
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
-//         Passing each menu ID as a set of Ids because each
-//         menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_upcoming, R.id.navigation_finished
+                R.id.navigation_home, R.id.navigation_upcoming, R.id.navigation_finished, R.id.navigation_setting
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        setupTheme()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.topAppBar.title = destination.label
@@ -62,6 +74,20 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.navigation_search, bundle)
                     true
                 } else -> false
+            }
+        }
+    }
+
+    private fun setupTheme() {
+        val dataStore = applicationContext.dataStore
+        val pref = SettingPreference.getInstance(dataStore)
+        CoroutineScope(Dispatchers.Main).launch {
+            pref.getThemeSetting().collect { isDarkModeActive ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
             }
         }
     }

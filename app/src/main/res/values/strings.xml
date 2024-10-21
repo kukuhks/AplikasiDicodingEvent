@@ -13,6 +13,9 @@
     <string name="search">Search</string>
     <string name="searchbar_hint">Masukkan kata</string>
     <string name="favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

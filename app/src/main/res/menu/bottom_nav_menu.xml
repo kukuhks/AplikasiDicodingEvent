@@ -16,4 +16,14 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_finish" />
 
+    <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/baseline_favorite_24"
+        android:title="@string/favorite" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/setting" />
+
 </menu>

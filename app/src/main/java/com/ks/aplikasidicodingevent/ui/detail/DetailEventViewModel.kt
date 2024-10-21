@@ -4,9 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ks.aplikasidicodingevent.data.local.entity.FavoriteEvent
 import com.ks.aplikasidicodingevent.data.remote.response.EventResponse
 import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.data.remote.retrofit.ApiConfig
+import com.ks.aplikasidicodingevent.data.repository.EventRepository
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
