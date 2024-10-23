@@ -9,7 +9,6 @@ data class FavoriteEvent(
     @PrimaryKey(autoGenerate = false)
     val id: String = "",
     val name: String = "",
-    val imageLogo: String? = null,
-    @field:ColumnInfo(name = "bookmarked")
-    var isBookmarked: Boolean
+    val summary: String = "",
+    val imageLogo: String? = null
 )

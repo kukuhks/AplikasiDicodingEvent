@@ -16,60 +16,31 @@ import retrofit2.Response
 
 class EventRepository private constructor(
     private val mFavDao: FavEventDao,
-    private val apiService: ApiService,
-    private val appExecutor: AppExecutors
 ) {
-    private val result = MediatorLiveData<Result<List<FavoriteEvent>>>()
+    fun getFavoriteEventById(id: String): LiveData<FavoriteEvent?> {
+        return mFavDao.getFavoriteEventById(id)
+    }
 
-    fun getFavoriteEvent(eventId: Int): LiveData<Result<List<FavoriteEvent>>> {
-        result.value = Result.Loading
-        val client = apiService.getEvents(eventId)
-        client.enqueue(object : Callback<EventResponse> {
-            override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
-                    if (response.isSuccessful) {
-                        val events = response.body()?.listEvents
-                        val newList = ArrayList<FavoriteEvent>()
-                        appExecutor.diskIO.execute {
-                            events?.forEach { event ->
-                                val isBookmarked = mFavDao.isEventBookmarked(event.id)
-                                val favorite  = FavoriteEvent(
-//                                    event.id,
-                                    event.name,
-                                    event.description,
-                                    event.imageLogo,
-                                    isBookmarked
-                                )
-                                newList.add(favorite)
-                            }
-                            mFavDao.deleteAll()
-                            mFavDao.insert(newList)
-                        }
-                    }
-            }
+    fun getAllFavoriteEvent(): LiveData<List<FavoriteEvent>> {
+        return mFavDao.getAllFavoriteEvent()
+    }
 
-            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
-                result.value = Result.Error(t.message.toString())
-            }
+    suspend fun addToFavorite(event: FavoriteEvent) {
+        mFavDao.insert(event)
+    }
 
-        })
-        val localData = mFavDao.getEvent()
-        result.addSource(localData) {newData: List<FavoriteEvent> ->
-            result.value = Result.Success(newData)
-        }
-        return result
-
+    suspend fun removeFromFavorite(event: FavoriteEvent) {
+        mFavDao.delete(event)
     }
 
     companion object {
         @Volatile
         private var instance: EventRepository? = null
         fun getDatabase(
-            apiService: ApiService,
-            mFavDao: FavEventDao,
-            appExecutors: AppExecutors
+            mFavDao: FavEventDao
         ) : EventRepository =
             instance ?: synchronized(this) {
-                instance ?: EventRepository(mFavDao, apiService, appExecutors)
+                instance ?: EventRepository(mFavDao)
             }.also { instance = it }
     }
 

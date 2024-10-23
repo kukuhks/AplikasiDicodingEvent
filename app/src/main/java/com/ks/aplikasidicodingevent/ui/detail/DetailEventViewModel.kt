@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailEventViewModel: ViewModel() {
+class DetailEventViewModel(private val repository: EventRepository): ViewModel() {
     private var _detailEvent = MutableLiveData<ListEventsItem>()
     val detailEvent: LiveData<ListEventsItem> = _detailEvent
 
@@ -48,5 +48,20 @@ class DetailEventViewModel: ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
+    }
+
+
+    fun getFavoriteStatus(id: String): LiveData<FavoriteEvent?> {
+        return repository.getFavoriteEventById(id)
+    }
+
+    fun toggleFavorite(event: FavoriteEvent, isFavorite: Boolean) {
+        viewModelScope.launch {
+            if (isFavorite) {
+                repository.removeFromFavorite(event)
+            } else {
+                repository.addToFavorite(event)
+            }
+        }
     }
 }

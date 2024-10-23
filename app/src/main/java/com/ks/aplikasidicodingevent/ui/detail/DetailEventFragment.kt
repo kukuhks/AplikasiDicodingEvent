@@ -13,13 +13,18 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.ks.aplikasidicodingevent.R
+import com.ks.aplikasidicodingevent.data.local.entity.FavoriteEvent
 import com.ks.aplikasidicodingevent.databinding.FragmentDetailEventBinding
+import com.ks.aplikasidicodingevent.ui.ViewModelFactory
 import java.util.Locale
 
 class DetailEventFragment : Fragment() {
     private var _binding: FragmentDetailEventBinding? = null
     private val binding get() = _binding!!
-    private val detailEventViewModel by viewModels<DetailEventViewModel>()
+    private val detailEventViewModel: DetailEventViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private fun formatDate(inputDate: String): String {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -75,6 +80,23 @@ class DetailEventFragment : Fragment() {
         detailEventViewModel.isLoading.observe(viewLifecycleOwner){
             showLoading(it)
         }
+
+        detailEventViewModel.getFavoriteStatus(eventId.toString()).observe(viewLifecycleOwner) { favoriteEvent ->
+            val isFavorite = favoriteEvent != null
+            toggleFavorite(isFavorite)
+
+            binding.ivFavorite.setOnClickListener {
+                val event = detailEventViewModel.detailEvent.value
+                event?.let {
+                    detailEventViewModel.toggleFavorite(
+                        FavoriteEvent(it.id.toString(), it.name, it.imageLogo),
+                        isFavorite = isFavorite
+                    )
+                }
+            }
+        }
+
+
     }
 
     override fun onCreateView(
@@ -88,6 +110,15 @@ class DetailEventFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun toggleFavorite(isFavorite: Boolean) {
+        val icon = if (isFavorite) {
+            R.drawable.baseline_favorite_white_24
+        } else {
+            R.drawable.baseline_favorite_border_white_24
+        }
+        binding.ivFavorite.setImageResource(icon)
     }
 
     override fun onDestroyView() {

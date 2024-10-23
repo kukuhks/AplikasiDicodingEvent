@@ -6,23 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ks.aplikasidicodingevent.R
 import com.ks.aplikasidicodingevent.databinding.FragmentFavoriteBinding
 import com.ks.aplikasidicodingevent.ui.ViewModelFactory
+import com.ks.aplikasidicodingevent.ui.detail.DetailEventViewModel
 
 class FavoriteFragment : Fragment() {
 
     private var _binding : FragmentFavoriteBinding? = null
     private val binding get() = _binding
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireContext())
-        val viewModel: FavoriteViewModel by viewModels { factory }
-
-//        viewModel.getFavoriteEvent(eventId).observe()
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
     }
+    private lateinit var favoriteEventAdapter: FavoriteEventAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +32,26 @@ class FavoriteFragment : Fragment() {
         return binding?.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        favoriteEventAdapter = FavoriteEventAdapter { favoriteEvent ->
+            val action = FavoriteFragmentDirections.actionNavigationFavoriteToNavigationDetail(favoriteEvent.id.toInt())
+            findNavController().navigate(action)
+        }
+
+        binding?.rvEvent?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = favoriteEventAdapter
+        }
+
+        favoriteViewModel.getFavoriteStatus().observe(viewLifecycleOwner) { favoriteEvent ->
+            favoriteEventAdapter.setFavoriteEvents(favoriteEvent)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

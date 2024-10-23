@@ -58,6 +58,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_favorite"
+        android:label="@string/favorite"
+        android:name="com.ks.aplikasidicodingevent.ui.favorite.FavoriteFragment"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_setting"
         android:label="@string/setting"
         android:name="com.ks.aplikasidicodingevent.ui.setting.SettingFragment"

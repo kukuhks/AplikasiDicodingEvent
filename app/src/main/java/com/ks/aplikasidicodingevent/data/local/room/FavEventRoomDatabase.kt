@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ks.aplikasidicodingevent.data.local.entity.FavoriteEvent
 
-@Database(entities = [FavoriteEvent::class], version = 1, exportSchema = false)
+@Database(entities = [FavoriteEvent::class], version = 2, exportSchema = false)
 abstract class FavEventRoomDatabase : RoomDatabase() {
     abstract fun eventDao() : FavEventDao
 
@@ -14,12 +14,15 @@ abstract class FavEventRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: FavEventRoomDatabase? = null
 
-        fun getDatabase(context: Context): FavEventRoomDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(
+        fun getDatabase(context: Context): FavEventRoomDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     FavEventRoomDatabase::class.java, "Favorite_event"
                 ).build()
+                INSTANCE = instance
+                instance
             }
+        }
     }
 }

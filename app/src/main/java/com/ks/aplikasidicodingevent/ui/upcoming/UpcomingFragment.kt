@@ -32,18 +32,6 @@ class UpcomingFragment : Fragment(), EventAdapter.OnItemClickListener {
         upcomingViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
-//        val searchView = view.findViewById<SearchView>(R.id.searchView)
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                query?.let {
-//                    searchViewModel.findEvent(1, it)
-//                }
-//                return true
-//            }
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                return true
-//            }
-//        })
     }
 
     override fun onCreateView(
