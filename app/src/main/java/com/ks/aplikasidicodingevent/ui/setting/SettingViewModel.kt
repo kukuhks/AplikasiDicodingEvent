@@ -6,7 +6,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class SettingViewModel(private val pref: SettingPreference) : ViewModel() {
+class SettingViewModel(
+    private val pref: SettingPreference,
+    private val notificationPreference: NotificationPreference
+) : ViewModel() {
     fun getThemeSettings(): LiveData<Boolean> {
         return pref.getThemeSetting().asLiveData()
     }
@@ -14,5 +17,9 @@ class SettingViewModel(private val pref: SettingPreference) : ViewModel() {
         viewModelScope.launch {
             pref.saveThemeSetting(isDarkModeActive)
         }
+    }
+
+    fun getNotificationSetting(isEnabled: Boolean) {
+        return notificationPreference.setNotificationEnabled(isEnabled)
     }
 }

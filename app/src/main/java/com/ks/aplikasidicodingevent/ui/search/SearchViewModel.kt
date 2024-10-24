@@ -17,9 +17,6 @@ class SearchViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-//    companion object {
-//        private const val ACTIVE = -1
-//    }
 
     fun findEvent(status: Int, query: String) {
         _isLoading.value = true  // Show loading indicator

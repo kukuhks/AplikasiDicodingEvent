@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)//viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)//livedata
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.android.async.http)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
