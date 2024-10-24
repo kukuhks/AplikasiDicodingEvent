@@ -38,13 +38,13 @@ class SearchFragment : Fragment(), EventAdapter.OnItemClickListener {
         binding.rvEvent.adapter = eventAdapter
 
         // Observe LiveData dari ViewModel
-        viewModel.listEvent.observe(viewLifecycleOwner, { events ->
+        viewModel.listEvent.observe(viewLifecycleOwner) { events ->
             setEventData(events)
-        })
+        }
 
-        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        })
+        }
 
         status = arguments?.getInt("status") ?: 1
 

@@ -30,10 +30,10 @@ class DetailEventFragment : Fragment() {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val outputFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale.getDefault())
         return try {
-            val date = inputFormat.parse(inputDate) // Parsing string ke Date
-            outputFormat.format(date) // Format ulang ke bentuk yang mudah dibaca
+            val date = inputFormat.parse(inputDate)
+            outputFormat.format(date)
         } catch (e: Exception) {
-            inputDate // Kembalikan input jika parsing gagal
+            inputDate
         }
     }
 
@@ -89,7 +89,7 @@ class DetailEventFragment : Fragment() {
                 val event = detailEventViewModel.detailEvent.value
                 event?.let {
                     detailEventViewModel.toggleFavorite(
-                        FavoriteEvent(it.id.toString(), it.name, it.imageLogo),
+                        FavoriteEvent(it.id.toString(), it.name, it.summary, it.imageLogo),
                         isFavorite = isFavorite
                     )
                 }

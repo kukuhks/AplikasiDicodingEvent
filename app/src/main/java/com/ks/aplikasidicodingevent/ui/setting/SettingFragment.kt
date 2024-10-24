@@ -1,21 +1,15 @@
 package com.ks.aplikasidicodingevent.ui.setting
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.switchmaterial.SwitchMaterial
-import com.ks.aplikasidicodingevent.R
 import com.ks.aplikasidicodingevent.databinding.FragmentSettingBinding
-import java.util.prefs.Preferences
+
 
 
 class SettingFragment : Fragment() {

@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ks.aplikasidicodingevent.R
 import com.ks.aplikasidicodingevent.databinding.FragmentFavoriteBinding
 import com.ks.aplikasidicodingevent.ui.ViewModelFactory
-import com.ks.aplikasidicodingevent.ui.detail.DetailEventViewModel
 
 class FavoriteFragment : Fragment() {
 

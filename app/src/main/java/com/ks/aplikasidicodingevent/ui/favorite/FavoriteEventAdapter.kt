@@ -3,18 +3,13 @@ package com.ks.aplikasidicodingevent.ui.favorite
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.ks.aplikasidicodingevent.data.local.entity.FavoriteEvent
-import com.ks.aplikasidicodingevent.data.remote.response.ListEventsItem
 import com.ks.aplikasidicodingevent.databinding.ItemEventFavoriteBinding
-import com.ks.aplikasidicodingevent.ui.EventAdapter
 
 class FavoriteEventAdapter(private val onItemClick: (FavoriteEvent) -> Unit) : Adapter<FavoriteEventAdapter.ViewHolder>(
-//    DIFF_CALLBACK
 ) {
 
     private var favoriteEvent = listOf<FavoriteEvent>()
@@ -41,30 +36,10 @@ class FavoriteEventAdapter(private val onItemClick: (FavoriteEvent) -> Unit) : A
     class ViewHolder(private val binding: ItemEventFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: FavoriteEvent) {
             binding.tvItemName.text = event.name
+            binding.tvItemDescription.text = event.summary
             Glide.with(itemView.context)
                 .load(event.imageLogo)
-                .into(binding.ivFavorite)
+                .into(binding.imgItemPhoto)
         }
     }
-
-    companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteEvent>() {
-            override fun areItemsTheSame(oldItem: FavoriteEvent, newItem: FavoriteEvent): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(
-                oldItem: FavoriteEvent,
-                newItem: FavoriteEvent
-            ): Boolean {
-                return oldItem == newItem
-            }
-
-        }
-    }
-
-//    interface OnItemClickListener {
-//        fun onItemClick(event: FavoriteEvent)
-//    }
-
 }
