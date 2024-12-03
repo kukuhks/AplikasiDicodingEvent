@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
             finishedEventData(listEvents)
         }
 
-        homeViewModel.isLoadingUpcoming.observe(viewLifecycleOwner) {
+        homeViewModel.isLoadingFinished.observe(viewLifecycleOwner) {
             showLoadingUpcoming(it)
         }
 

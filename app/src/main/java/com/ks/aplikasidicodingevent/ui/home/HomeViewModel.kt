@@ -18,9 +18,6 @@ class HomeViewModel : ViewModel() {
     private val _finishedListEvent = MutableLiveData<List<ListEventsItem>>()
     val  finishedListEvent: LiveData<List<ListEventsItem>> get() = _finishedListEvent
 
-    private val _isLoadingUpcoming = MutableLiveData<Boolean>()
-    val isLoadingUpcoming : LiveData<Boolean> = _isLoadingUpcoming
-
     private val _isLoadingFinished = MutableLiveData<Boolean>()
     val isLoadingFinished : LiveData<Boolean> = _isLoadingFinished
 
@@ -34,14 +31,14 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun findUpcomingEvent() {
-        _isLoadingUpcoming.value = true
+        _isLoadingFinished.value = true
         val client = ApiConfig.getApiService().getEvents(1)
         client.enqueue(object : Callback<EventResponse> {
             override fun onResponse(
                 call: Call<EventResponse>,
                 response: Response<EventResponse>
             ) {
-                _isLoadingUpcoming.postValue(false)
+                _isLoadingFinished.postValue(false)
                 if (response.isSuccessful) {
                     response.body()?.listEvents?.let { listEventsItems -> _upcomingListEvent.value = listEventsItems }
                 } else {
@@ -49,7 +46,7 @@ class HomeViewModel : ViewModel() {
                 }
             }
             override fun onFailure(call: Call<EventResponse>, t: Throwable) {
-                _isLoadingUpcoming.postValue(false)
+                _isLoadingFinished.postValue(false)
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })

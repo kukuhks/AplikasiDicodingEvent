@@ -23,7 +23,7 @@ class EventRepository private constructor(
         mFavDao.delete(event)
     }
 
-    companion object {
+    companion   object {
         @Volatile
         private var instance: EventRepository? = null
         fun getDatabase(

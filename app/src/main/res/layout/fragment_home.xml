@@ -74,13 +74,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvInfoFinish"
                 app:layout_constraintVertical_bias="1.0"
-                tools:layout_editor_absoluteX="81dp" />
+                tools:layout_editor_absoluteX="81dp"
+                tools:listitem="@layout/item_event_home_vertical"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEventHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                tools:listitem=""
                 app:layout_constraintTop_toBottomOf="@id/tvInfoUpcoming"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

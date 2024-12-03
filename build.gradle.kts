@@ -5,8 +5,8 @@ plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.13" apply false
 }
 
-buildscript {
-    dependencies {
-        classpath (libs.androidx.navigation.safe.args.gradle.plugin)
-    }
+    buildscript {
+        dependencies {
+            classpath (libs.androidx.navigation.safe.args.gradle.plugin)
+        }
 }
